@@ -1,0 +1,134 @@
+%  report.tex
+%
+%  Version 0.0.0
+%
+%  Copyright 2015 Nick Hepler <nick.hepler@outlook.com>
+%
+%  This program is free software; you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation; either version 2 of the License, or
+%  (at your option) any later version.
+%
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You should have received a copy of the GNU General Public License
+%  along with this program; if not, write to the Free Software
+%  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+%  MA 02110-1301, USA.
+%
+
+% Use a one-sided article template
+\documentclass[oneside]{article}
+% Decrease the margins a little
+\usepackage{fullpage}
+
+% Set up for including graphics
+% We'll use png or pdf graphics
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.png,.pdf}
+
+% Hyperref adds hyperlinks to the document automatically
+% It's not much use yet, but it will be
+\usepackage{hyperref}
+
+% For including code into the document
+\usepackage{verbatim}
+
+% Tweak the default fonts a little
+\renewcommand\rmdefault{bch}
+\usepackage[small]{caption}
+\usepackage[small]{titlesec}
+\linespread{1.07} 
+
+\title{Horse Racing Death and Breakdown in New York State}
+\author{Nick Hepler}
+\date{\today}
+
+\raggedbottom
+
+\begin{document}
+\maketitle 
+
+\section{Introduction}
+
+\subsection{Background}
+The New York State Gaming Commission was formed in 2013 upon the merger of the New York State Racing and Wagering Board and the New York Lottery. The Gaming Commission oversees the lottery, horse racing, charitable gaming, casino gaming and video lottery terminals in New York State. In order to safeguard the interest of the public, including the taxpayers and patrons, the New York State Gaming Commission maintains the Equine Death and Breakdown database. The database provides a detailed list of every horse that has broken down, died, sustained a serious injury, or been involved in an incident at a track in New York State since year 2009.
+
+\subsection{Objectives}
+The main objective of this project was to utilize the R language and environment for statistical computing and graphics to perform the following: obtain a raw data set, prepare the raw data for analysis, run an analysis of the data, provide a visualization of the data, and to create a report document employing the LaTeX documentation format.
+
+\subsection{Scope}
+This report examines data between the years 2009 and 2014. Data for 2015 was available, but it was excluded so that only full annual counts were calculated. Additionally, the report focused on equine deaths although the data set contained information on several other incident types.
+
+\section{Findings}
+Between 2009 and 2014, the average (N=904) annual number of deaths related to horse racing was 151 (rounded to the nearest whole number). The lowest number of equine deaths occurred in 2009 with 127 deaths reported. The most number of equine deaths occurred in 2010 with 207 reported.
+
+Overall, the harness racing division saw the least number of equine deaths with 112 reported between 2009 and 2014. The thoroughbred racing division accounted for the remaining 792 deaths.
+
+Among the race tracks, Finger Lakes Gaming \& Racetrack had the highest number of equine deaths over the six year period totaling 286. Tioga Downs had the lowest number of equine deaths with a total of 7.
+
+\newpage
+\subsection{Reported Equine Deaths by Year/Division}
+\begin{table}[h]
+\centering
+\caption{Reported Equine Deaths by Year/Division}
+\label{my-label}
+\begin{tabular}{|lcccccc|}
+\hline
+{\bf Year}         & {\bf 2009} & {\bf 2010} & {\bf 2011} & {\bf 2012} & {\bf 2013} & {\bf 2014} \\
+{\bf Harness}      & 17         & 35         & 18         & 17         & 12         & 13         \\
+{\bf Thoroughbred} & 110        & 172        & 147        & 139        & 111        & 113        \\
+{\bf Total}        & 127        & 207        & 165        & 156        & 123        & 126        \\ \hline
+\end{tabular}
+\end{table}
+
+\includegraphics[width = .5\linewidth]{aed_yd_p}
+\includegraphics[width = .5\linewidth]{aed_yd_b}
+
+\newpage
+\subsection{Reported Equine Deaths by Year/Track}
+\begin{table}[h]
+\centering
+\caption{Reported Equine Deaths by Year/Track}
+\label{my-label}
+\begin{tabular}{|lllllll|}
+\hline
+{\bf Track}                           & {\bf 2009} & {\bf 2010} & {\bf 2011} & {\bf 2012} & {\bf 2013} & {\bf 2014} \\
+Aqueduct Racetrack (NYRA)             & 17         & 29         & 30         & 34         & 23         & 23         \\
+Batavia Downs                         & 4          & 3          & 1          & 1          & 0          & 1          \\
+Belmont Park (NYRA)                   & 39         & 65         & 46         & 45         & 38         & 42         \\
+Buffalo Raceway                       & 0          & 9          & 7          & 3          & 2          & 3          \\
+Finger Lakes Gaming \& Racetrack      & 43         & 63         & 62         & 44         & 40         & 34         \\
+Monticello Raceway \& Mighty M Gaming & 5          & 9          & 4          & 2          & 4          & 4          \\
+Saratoga Gaming \& Raceway            & 12         & 23         & 11         & 18         & 12         & 14         \\
+Tioga Downs                           & 0          & 2          & 1          & 2          & 1          & 1          \\
+Vernon Downs                          & 1          & 1          & 0          & 3          & 2          & 1          \\
+Yonkers Raceway                       & 6          & 3          & 3          & 4          & 1          & 3          \\ \hline
+\end{tabular}
+\end{table}
+\includegraphics[width = .5\linewidth]{ted_t_p}
+\includegraphics[width = .5\linewidth]{ted_t_b}
+
+\newpage
+\appendix
+\section{Download Data Code}
+The following code can be run using \verb|source("download_data.R")| from R. This source code downloads the raw data file from the source.
+
+\verbatiminput{../download_data.R}
+\newpage
+
+\section{Data Preparation Code}
+The following code can be run using \verb|source("data_preparation.R")| from R. This source code prepares the raw data for analysis and creates a final tidy data set.
+
+\verbatiminput{../data_preparation.R}
+\newpage
+
+\section{Run Analysis Code}
+The following code can be run using \verb|source("run_analysis.R")| from R. This source code provides a visualization of the data.
+
+\verbatiminput{../run_analysis.R}
+
+\end{document}
