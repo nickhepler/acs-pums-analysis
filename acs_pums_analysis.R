@@ -3,7 +3,7 @@
 #
 # Copyright (C) 2015  Nick Hepler
 #
-#  Version 0.0.9
+#  Version 0.9.0
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,8 +41,10 @@ transition <- select(transition, fincp, npp)
 
 # Convert npp variable to a factor, rename the variables.
 transition$household <- NA
-transition$household[transition$npp == 0] <- "Not a grandparent headed household with no parent present"
-transition$household[transition$npp == 1] <- "Grandparent headed household with no parent present"
+transition$household[transition$npp == 0] <- 
+  "Not a grandparent headed household with no parent present"
+transition$household[transition$npp == 1] <- 
+  "Grandparent headed household with no parent present"
 transition <- select(transition, -(npp))
 transition$household <- factor(transition$household, levels=c(
   "Not a grandparent headed household with no parent present",
@@ -104,7 +106,7 @@ summarise(by_household, sd(income, na.rm=TRUE))
 par(cex.lab=.90)
 options(scipen=999)
 
-pdf("./report/hist.nghh.pdf")
+pdf("./report/hist_nghh.pdf")
 hist(nghh$income,
   breaks="FD",
   col="#660000",
@@ -113,7 +115,7 @@ hist(nghh$income,
   sub="Grandparent Not Head of Household", col.sub="#E0AD12")
 dev.off()
 
-pdf("./report/hist.ghh.pdf")
+pdf("./report/hist_ghh.pdf")
 hist(ghh$income,
   breaks="FD",
   col="#660000",
@@ -122,14 +124,14 @@ hist(ghh$income,
   sub="Grandparent Head of Household", col.sub="#E0AD12")
 dev.off()
 
-pdf("./report/box.nghh.pdf")
+pdf("./report/box_nghh.pdf")
 boxplot(nghh$income,
   sub="Grandparent Not Head of Household", col.sub="#E0AD12",
   ylab="Annual Income (in USD)",
   main="Household Income Box Plot", col.main="#4B245E")
 dev.off()
 
-pdf("./report/box.ghh.pdf")
+pdf("./report/box_ghh.pdf")
 boxplot(ghh$income,
   sub="Grandparent Head of Household", col.sub="#E0AD12",
   ylab="Annual Income (in USD)",
@@ -140,7 +142,7 @@ par(cex.lab=1)
 options(scipen=0)
 
 # Clean up global envrionment.
-rm(temp)
+rm(list=ls())
 
 # Remove temporary file
 unlink(temp)
