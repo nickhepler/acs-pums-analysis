@@ -1,6 +1,6 @@
 %  report.tex
 %
-%  Version 0.0.0
+%  Version 0.1.0
 %
 %  Copyright 2015 Nick Hepler <nick.hepler@outlook.com>
 %
@@ -43,92 +43,59 @@
 \usepackage[small]{titlesec}
 \linespread{1.07} 
 
-\title{Horse Racing Death and Breakdown in New York State}
+\title{Statistical Analysis of Household Types and Incomes}
 \author{Nick Hepler}
-\date{\today}
+\date{February 20, 2015}
 
 \raggedbottom
 
 \begin{document}
 \maketitle 
 
-\section{Introduction}
+\section{Project Summary}
 
-\subsection{Background}
-The New York State Gaming Commission was formed in 2013 upon the merger of the New York State Racing and Wagering Board and the New York Lottery. The Gaming Commission oversees the lottery, horse racing, charitable gaming, casino gaming and video lottery terminals in New York State. In order to safeguard the interest of the public, including the taxpayers and patrons, the New York State Gaming Commission maintains the Equine Death and Breakdown database. The database provides a detailed list of every horse that has broken down, died, sustained a serious injury, or been involved in an incident at a track in New York State since year 2009.
+This source data set contains a sample of actual responses to the American Community Survey Public Use Microdata Sample (PUMS) from residents in New York State. Each observation represents a response from a single housing unit and the sample data represents responses from approximately one percent of the United States population.
 
-\subsection{Objectives}
-The main objective of this project was to utilize the R language and environment for statistical computing and graphics to perform the following: obtain a raw data set, prepare the raw data for analysis, run an analysis of the data, provide a visualization of the data, and to create a report document employing the LaTeX documentation format.
+Utilizing this data set, a comparative analysis of household income was conducted based upon households with no parent present in which the household was headed by a grandparent or not headed by a grandparent.
 
-\subsection{Scope}
-This report examines data between the years 2009 and 2014. Data for 2015 was available, but it was excluded so that only full annual counts were calculated. Additionally, the report focused on equine deaths although the data set contained information on several other incident types.
+\section{Methods}
 
-\section{Findings}
-Between 2009 and 2014, the average (N=904) annual number of deaths related to horse racing was 151 (rounded to the nearest whole number). The lowest number of equine deaths occurred in 2009 with 127 deaths reported. The most number of equine deaths occurred in 2010 with 207 reported.
+The source data was obtained through the American Community Survey Public Use Microdata Sample (PUMS) furnished by the United States Census Bureau, American Community Survey Office. The original data can be found on the Census FTP Site.
 
-Overall, the harness racing division saw the least number of equine deaths with 112 reported between 2009 and 2014. The thoroughbred racing division accounted for the remaining 792 deaths.
+The R programming language was employed to perform the statistical analysis to include measures of central tendency and dispersion. In order to compare the two data samples, the data was subset using the NPP variable in the source data which denotes if a household with no parent present is headed by a grandparent. Missing data in the FINCP variable denoting annual household income was ignored, but negative income was included in the calculations. Calculations were rounded to the nearest hundredth.
 
-Among the race tracks, Finger Lakes Gaming \& Racetrack had the highest number of equine deaths over the six year period totaling 286. Tioga Downs had the lowest number of equine deaths with a total of 7.
+\section{Data Considerations}
 
-\newpage
-\subsection{Reported Equine Deaths by Year/Division}
-\begin{table}[h]
-\centering
-\caption{Reported Equine Deaths by Year/Division}
-\label{my-label}
-\begin{tabular}{|lcccccc|}
-\hline
-{\bf Year}         & {\bf 2009} & {\bf 2010} & {\bf 2011} & {\bf 2012} & {\bf 2013} & {\bf 2014} \\
-{\bf Harness}      & 17         & 35         & 18         & 17         & 12         & 13         \\
-{\bf Thoroughbred} & 110        & 172        & 147        & 139        & 111        & 113        \\
-{\bf Total}        & 127        & 207        & 165        & 156        & 123        & 126        \\ \hline
-\end{tabular}
-\end{table}
+The raw data set contains 92,810 observations. Of these observations, the NPP variable was missing in 18,659 observations. Based on the rationale for this report, these observations were excluded leaving 74,151 observations remaining.
 
-\includegraphics[width = .5\linewidth]{aed_yd_p}
-\includegraphics[width = .5\linewidth]{aed_yd_b}
+Of the 74,151 observations remaining, 25,732 had a missing value for the FINCP variable leaving 48,419 observations available for analysis. Of these observations, 48,156 observations were for households not headed by a grandparent with no parent present and the 263 remaining observations were associated with households headed by a grandparent with no parent present.
 
 \newpage
-\subsection{Reported Equine Deaths by Year/Track}
-\begin{table}[h]
-\centering
-\caption{Reported Equine Deaths by Year/Track}
-\label{my-label}
-\begin{tabular}{|lllllll|}
-\hline
-{\bf Track}                           & {\bf 2009} & {\bf 2010} & {\bf 2011} & {\bf 2012} & {\bf 2013} & {\bf 2014} \\
-Aqueduct Racetrack (NYRA)             & 17         & 29         & 30         & 34         & 23         & 23         \\
-Batavia Downs                         & 4          & 3          & 1          & 1          & 0          & 1          \\
-Belmont Park (NYRA)                   & 39         & 65         & 46         & 45         & 38         & 42         \\
-Buffalo Raceway                       & 0          & 9          & 7          & 3          & 2          & 3          \\
-Finger Lakes Gaming \& Racetrack      & 43         & 63         & 62         & 44         & 40         & 34         \\
-Monticello Raceway \& Mighty M Gaming & 5          & 9          & 4          & 2          & 4          & 4          \\
-Saratoga Gaming \& Raceway            & 12         & 23         & 11         & 18         & 12         & 14         \\
-Tioga Downs                           & 0          & 2          & 1          & 2          & 1          & 1          \\
-Vernon Downs                          & 1          & 1          & 0          & 3          & 2          & 1          \\
-Yonkers Raceway                       & 6          & 3          & 3          & 4          & 1          & 3          \\ \hline
-\end{tabular}
-\end{table}
-\includegraphics[width = .5\linewidth]{ted_t_p}
-\includegraphics[width = .5\linewidth]{ted_t_b}
+\section{Summary Statistics}
+\subsection{Not Grandparent Headed Household}
+
+Measuring the central tendency of the data for households not grandparent headed, we find the average (n = 48,156) annual household income reported was \$95,153.96. The median household income was \$70,000.00. The minimum reported income was \$-12,800.00 and the maximum reported income was \$1,503,600.00. The range of the dispersion for income is \$1,516,400.00.
+
+Measuring the variability of the sample data for this population we find the interquartile range of household income was \$80,990.00. The standard deviation of household income was \$101,243.48.
+
+\includegraphics[width = .5\linewidth]{hist_nghh}
+\includegraphics[width = .5\linewidth]{box_nghh}
+
+\subsection{Grandparent Headed Household}
+
+Measuring the central tendency of the data for grandparent headed households, we find the average (n = 263) annual household income reported was \$44,123.11. The median household income was \$30,400.00 The minimum reported income was \$0 and the maximum reported income was \$589,700.00.
+
+Measuring the variability of the sample data for this population we find the interquartile range of household income was \$38,790.00. The standard deviation of household income was \$54,516.05.
+
+\includegraphics[width = .5\linewidth]{hist_ghh}
+\includegraphics[width = .5\linewidth]{box_ghh}
 
 \newpage
 \appendix
-\section{Download Data Code}
-The following code can be run using \verb|source("download_data.R")| from R. This source code downloads the raw data file from the source.
+\section{Source Code}
 
-\verbatiminput{../download_data.R}
-\newpage
+The following code can be run using \verb|source("acs_pums_analysis.R")| from R. This source code downloads the raw data file from the source.
 
-\section{Data Preparation Code}
-The following code can be run using \verb|source("data_preparation.R")| from R. This source code prepares the raw data for analysis and creates a final tidy data set.
-
-\verbatiminput{../data_preparation.R}
-\newpage
-
-\section{Run Analysis Code}
-The following code can be run using \verb|source("run_analysis.R")| from R. This source code provides a visualization of the data.
-
-\verbatiminput{../run_analysis.R}
+\verbatiminput{../acs_pums_analysis.R}
 
 \end{document}
