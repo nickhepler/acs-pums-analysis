@@ -1,4 +1,4 @@
-# Household Income #
+# Statistical Analysis of Household Types and Incomes #
 __American Community Survey Public Use Microdata Sample (PUMS)__
 
 _Nick Hepler, [University at Albany](http://www.albany.edu), [College of Computing & Information](http://www.albany.edu/cci/)_
